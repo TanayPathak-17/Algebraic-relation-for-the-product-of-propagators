@@ -3,17 +3,16 @@
 BeginPackage["AlgRel`"]
 
 
-Print["AlgRel.wl v1.0\n","Author : Tanay Pathak"];
+Print["AlgRel.wl v1.0\n","Author : B. Anantanarayan, Souvik Bera and Tanay Pathak"];
 
 
 AlgRel::usage="The command gives the algebraic relation for the product of propagators.
-AlgRed[{1,2,3,...},{k,p,m},{P,M},x]
-The form of the propagator is assumed to be \!\(\*SubscriptBox[\(d\), \(i\)]\)= (k+\!\(\*SubscriptBox[\(p\), \(i\)]\)\!\(\*SuperscriptBox[\()\), \(2\)]\)-\!\(\*SuperscriptBox[SubscriptBox[\(m\), \(i\)], \(2\)]\), given {k,p,m}.
-Value of i in above can be given in the first list.
-{P,M} denotes the variables to be used in auxillary denominator.
-x denotes the variable to be used to the coefficients.
-";
-
+AlgRed[{1,2,3,...},{k,p,m},{P,M},x,Substitution]
+The form of the propagtor is assumed to be \!\(\*SubscriptBox[\(d\), \(i\)]\)=(k+\!\(\*SubscriptBox[\(p\), \(i\)]\)\!\(\*SuperscriptBox[\()\), \(2\)]\)-\!\(\*SuperscriptBox[SubscriptBox[\(m\), \(i\)], \(2\)]\), given {k,p,m}.
+Value of 'i' in above can be given in the first list.
+{P,M}: denotes the variables to be used in auxillary denominator.
+x: denotes the variable to be used in the coefficients.
+Substitutions: values to be substituted."
 
 
 Begin["`Private`"]
@@ -33,8 +32,8 @@ Return[Simplify[solxp[[1]]]];
 ]
 
 
-AlgRel[dlist_,{k0_,p0_,m0_},{pdd0_,M0_},x0_]:= Module[{listx,decomlist,x,P,k,xcounter,dcounter,listxs,decomlistsp0,m,M},
-x=x0;P=pdd0;k=k0;p=p0;m=m0;M=M0;
+AlgRel[dlist_,{k0_,p0_,m0_},{pdd0_,M0_},x0_,sublist_]:= Module[{listx,decomlist,x,P,k,xcounter,dcounter,listxs,decomlistsp0,m,M,sub0,p,decomlists,decomexp},
+x=x0;P=pdd0;k=k0;p=p0;m=m0;M=M0;sub0=sublist;
 d[i_]:= (k+p[i])^2-m[i]^2;
 dd[i_]:= (k+P[i])^2-M[i]^2;
 decomlist={};decomlists={};
@@ -43,7 +42,7 @@ Table[AppendTo[decomlist,{x[i]/dd[1],dlist[[i]]}],{i,2}];
 decomexp= Sum[decomlist[[i,1]]/d[decomlist[[i,2]]],{i,1,Length[decomlist]}];
 dcounter=2;listxs={};
 
-If[Length[dlist]===2,Return[{decomexp,listx}],
+If[Length[dlist]===2,Return[{decomexp/.sub0,listx/.sub0}],
    (   
        For[i=3,i<= Length[dlist],i++,
                   Table[(   AppendTo[ listxs, decomposetwo[d[decomlist[[j,2]]],d[dlist[[i]]],dcounter,2 dcounter-1,x,k,P]];
@@ -56,13 +55,11 @@ If[Length[dlist]===2,Return[{decomexp,listx}],
             AppendTo[decomlist,decomlists];
             decomlist= Flatten[decomlist,1]; 
             decomlists={};
-            If[i==Length[dlist],decomexp= Sum[decomlist[[i,1]] 1/d[decomlist[[i,2]]],{i,1,Length[decomlist]}],Nothing[]];
+            If[i==Length[dlist],decomexp= (Sum[decomlist[[i,1]] 1/d[decomlist[[i,2]]],{i,1,Length[decomlist]}]),Nothing[]];
                ]
        )];
-Return[{decomexp,Flatten[listx]}];
+Return[{decomexp/.sub0,Flatten[Simplify[listx/.sub0]]}]
 ]
-
-
 
 
 End[]
