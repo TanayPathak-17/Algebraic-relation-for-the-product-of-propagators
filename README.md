@@ -14,4 +14,4 @@ The package one command : *AlgRel*. The description of the same can be found usi
 
 **Example file**
 
-One example file *Examples.nb* is also provided with various one, two and three-loop examples. 
+One example file *Examples.nb* is also provided. It contains the demonstration of the package for various one, two and three-loop examples. 
