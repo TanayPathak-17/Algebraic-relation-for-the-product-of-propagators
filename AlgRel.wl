@@ -3,7 +3,7 @@
 BeginPackage["AlgRel`"]
 
 
-Print["AlgRel.wl v1.0\n","Author : B. Anantanarayan, Souvik Bera and Tanay Pathak"];
+Print["AlgRel.wl v1.0\n","Author: B. Anantanarayan, Souvik Bera and Tanay Pathak"];
 
 
 AlgRel::usage="The command gives the algebraic relation for the product of propagators.
