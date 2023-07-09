@@ -9,7 +9,7 @@ After setting the path, The ***AlgRel*** package can be called using the followi
 ```
 The package one command : *AlgRel*. The description of the same can be found using the following command
 ```
-??AlgRel
+?AlgRel
 ```
 
 **Example file**
