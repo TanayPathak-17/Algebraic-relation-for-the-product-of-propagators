@@ -18,4 +18,3 @@ The package one command : *AlgRel*. The description of the same can be found usi
 
 One example file *Examples.nb* is also provided. It contains the demonstration of the package for various one, two and three-loop examples. 
 
-**Note**: The P[i] that appears in the auxiliary denominator should be considered as four vectors. This can be realised by replacing 1/**p** -> **p**/p^{2}, where **p** is the vector appearing in the denominator.
